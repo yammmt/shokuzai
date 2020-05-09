@@ -35,12 +35,19 @@
                     <tr>
                         <th>Name</th>
                         <th>Expiry Date</th>
+                        <th>Delete</th>
                     </tr>
                     <tbody>
                         {% for food in foods %}
                         <tr>
                             <td>{{ food.name }}</td>
                             <td>{{ food.expiry_date }}</td>
+                            <td>
+                                <form class="inline" action="/{{ food.id }}" method="post">
+                                    <input type="hidden" name="_method" value="delete" />
+                                    <button class="button is-danger" type="submit">Delete</button>
+                                </form>
+                            </td>
                         </tr>
                         {% endfor %}
                     </tbody>

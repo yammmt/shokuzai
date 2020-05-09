@@ -39,6 +39,7 @@ fn rocket() -> Rocket {
         .mount("/", routes![
             routes::food::index,
             routes::food::new,
+            routes::food::delete,
         ])
         .attach(Template::fairing())
 }

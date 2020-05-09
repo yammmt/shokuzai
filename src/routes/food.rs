@@ -37,3 +37,12 @@ pub fn new(food_form: Form<Food>, conn: DbConn) -> Flash<Redirect> {
         Flash::warning(Redirect::to("/"), "The server failed.")
     }
 }
+
+#[delete("/<id>")]
+pub fn delete(id: i32, conn: DbConn) -> Flash<Redirect> {
+    if Food::delete(id, &conn) {
+        Flash::success(Redirect::to("/"), "Your food is deleted.")
+    } else {
+        Flash::warning(Redirect::to("/"), "The server failed.")
+    }
+}

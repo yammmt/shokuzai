@@ -108,3 +108,25 @@ fn food_insertion_failed() {
         assert!(cookies.any(|v| v.contains("warning")));
     })
 }
+
+#[test]
+fn food_deletion_passed() {
+    run_test!(|client, conn| {
+        // Create a food to be deleted.
+        let res = client.post("/")
+            .header(ContentType::Form)
+            .body("name=deletiontest&expiry_date=2020-03-01")
+            .dispatch();
+        assert_eq!(res.status(), Status::SeeOther);
+        let mut cookies = res.headers().get("Set-Cookie");
+        assert!(cookies.any(|v| v.contains("success")));
+        let id = Food::all(&conn)[0].id.unwrap();
+
+        // Delete the created food.
+        let res = client.delete(format!("/{}", id)).dispatch();
+        assert_eq!(res.status(), Status::SeeOther);
+        let mut cookies = res.headers().get("Set-Cookie");
+        assert!(cookies.any(|v| v.contains("success")));
+        assert_eq!(Food::all(&conn).len(), 0);
+    })
+}

@@ -31,6 +31,10 @@ impl Food {
         diesel::insert_into(foods::table).values(&f).execute(conn).is_ok()
     }
 
+    pub fn delete(id: i32, conn: &SqliteConnection) -> bool {
+        diesel::delete(all_foods.find(id)).execute(conn).is_ok()
+    }
+
     #[cfg(test)]
     pub fn delete_all(conn: &SqliteConnection) -> bool {
         diesel::delete(all_foods).execute(conn).is_ok()
