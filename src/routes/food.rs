@@ -5,7 +5,8 @@ extern crate serde_derive;
 use crate::DbConn;
 use crate::models::food::Food;
 
-use rocket::request::FlashMessage;
+use rocket::request::{FlashMessage, Form};
+use rocket::response::{Flash, Redirect};
 use rocket_contrib::templates::Template;
 
 #[derive(Debug, Serialize)]
@@ -23,4 +24,16 @@ pub fn index(msg: Option<FlashMessage>, conn: DbConn) -> Template {
         Some(ref msg) => IndexContext::raw(&conn, Some((msg.name(), msg.msg()))),
         None => IndexContext::raw(&conn, None),
     })
+}
+
+#[post("/", data = "<food_form>")]
+pub fn new(food_form: Form<Food>, conn: DbConn) -> Flash<Redirect> {
+    let food = food_form.into_inner();
+    if food.name.is_empty() || food.expiry_date.is_empty() {
+        Flash::warning(Redirect::to("/"), "Please input name and date.")
+    } else if Food::insert(food, &conn) {
+        Flash::success(Redirect::to("/"), "New food added.")
+    } else {
+        Flash::warning(Redirect::to("/"), "The server failed.")
+    }
 }

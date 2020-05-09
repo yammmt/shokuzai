@@ -38,6 +38,7 @@ fn rocket() -> Rocket {
         .mount("/", StaticFiles::from("static/"))
         .mount("/", routes![
             routes::food::index,
+            routes::food::new,
         ])
         .attach(Template::fairing())
 }

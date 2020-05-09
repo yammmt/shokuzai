@@ -18,6 +18,18 @@
 
     <section class="section">
         <div class="container">
+            <form class="field is-grouped" action="/" method="post">
+                <p class="control is-expanded">
+                    <input class="input" type="text" placeholder="new food name" name="name" id="name">
+                </p>
+                <p class="control is-expanded">
+                    <input class="input" type="date" name="expiry_date" id="expiry_date">
+                </p>
+                <p class="control">
+                    <button class="button is-info" type="submit">add</button>
+                </p>
+            </form>
+
             <table class="table">
                 <thead>
                     <tr>
