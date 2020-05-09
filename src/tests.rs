@@ -1,7 +1,9 @@
 extern crate parking_lot;
+extern crate rand;
 
 use super::models::food::Food;
 use self::parking_lot::Mutex;
+use self::rand::{Rng, thread_rng, distributions::Alphanumeric};
 
 use rocket::local::Client;
 use rocket::http::{ContentType, Status};
@@ -27,6 +29,28 @@ fn food_index_page() {
         // Ensure we can access index page.
         let res = client.get("/").dispatch();
         assert_eq!(res.status(), Status::Ok);
+
+        // Ensure foods are sorted by expiry date.
+        let food_num = 3;
+        let mut rng = thread_rng();
+        let mut names: Vec<String> = Vec::with_capacity(food_num);
+        let dates = ["2020-02-01", "2020-05-31", "2020-01-01"];
+        for i in 0..food_num {
+            let name: String = rng.sample_iter(&Alphanumeric).take(6).collect();
+            let res = client.post("/")
+                .header(ContentType::Form)
+                .body(format!("name={}&expiry_date={}", &name, &dates[i]))
+                .dispatch();
+            assert_eq!(res.status(), Status::SeeOther);
+            let mut cookies = res.headers().get("Set-Cookie");
+            assert!(cookies.any(|v| v.contains("success")));
+            names.push(name);
+        }
+        let mut res = client.get("/").dispatch();
+        assert_eq!(res.status(), Status::Ok);
+        let body = res.body_string().unwrap();
+        assert!(body.find(&names[2]).unwrap() < body.find(&names[0]).unwrap());
+        assert!(body.find(&names[0]).unwrap() < body.find(&names[1]).unwrap());
     })
 }
 

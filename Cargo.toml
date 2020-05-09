@@ -19,3 +19,4 @@ serde_derive = "^1.0"
 
 [dev-dependencies]
 parking_lot = { version = "^0.8", features = ["nightly"] }
+rand = "^0.6"

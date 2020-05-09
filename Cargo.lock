@@ -1188,6 +1188,7 @@ dependencies = [
  "diesel_migrations",
  "log 0.4.8",
  "parking_lot 0.8.0",
+ "rand",
  "rocket",
  "rocket_contrib",
  "serde",

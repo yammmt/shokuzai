@@ -23,7 +23,7 @@ pub struct Food {
 
 impl Food {
     pub fn all(conn: &SqliteConnection) -> Vec<Food> {
-        all_foods.load::<Food>(conn).unwrap()
+        all_foods.order(foods::expiry_date.asc()).load::<Food>(conn).unwrap()
     }
 
     pub fn insert(form: Food, conn: &SqliteConnection) -> bool {
