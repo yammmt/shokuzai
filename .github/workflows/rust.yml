@@ -1,0 +1,41 @@
+name: Rust
+
+on:
+  push:
+    branches: [ master ]
+  pull_request:
+    branches: [ master ]
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v2
+    - name: Install SQLite
+      run: sudo apt-get install libsqlite3-dev
+    - name: Use nightly
+      run: rustup default nightly
+    - name: Build
+      run: cargo build --verbose
+    - name: Run tests
+      run: cargo test --verbose
+
+  clippy_check:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v2
+    - name: Install SQLite
+      run: sudo apt-get install libsqlite3-dev
+    - uses: actions-rs/toolchain@v1
+      with:
+          toolchain: nightly
+          components: clippy
+          override: true
+    - uses: actions-rs/clippy-check@v1
+      with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          args: --all-features

@@ -1,0 +1,39 @@
+{% extends "base" %}
+
+{% block title %}shokuzai{% endblock title %}
+{% block head %}
+    {{ super() }}
+{% endblock head %}
+
+{% block content %}
+    <section class="section">
+        <div class="container">
+            {% if msg %}
+            <div class="notification is-{{ msg.0 }}">
+                {{ msg.1 }}
+            </div>
+            {% endif %}
+        </div>
+    </section>
+
+    <section class="section">
+        <div class="container">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>Name</th>
+                        <th>Expiry Date</th>
+                    </tr>
+                    <tbody>
+                        {% for food in foods %}
+                        <tr>
+                            <td>{{ food.name }}</td>
+                            <td>{{ food.expiry_date }}</td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </thead>
+            </table>
+        </div>
+    </section>
+{% endblock content %}
