@@ -5,6 +5,7 @@ use super::models::food::Food;
 use self::parking_lot::Mutex;
 use self::rand::{Rng, thread_rng, distributions::Alphanumeric};
 
+use chrono::{Duration, Local};
 use rocket::local::Client;
 use rocket::http::{ContentType, Status};
 
@@ -51,6 +52,30 @@ fn food_index_page() {
         let body = res.body_string().unwrap();
         assert!(body.find(&names[2]).unwrap() < body.find(&names[0]).unwrap());
         assert!(body.find(&names[0]).unwrap() < body.find(&names[1]).unwrap());
+
+        // Ensure dangerous food has red string.
+        let name_red: String = rng.sample_iter(&Alphanumeric).take(6).collect();
+        let name_normal: String = rng.sample_iter(&Alphanumeric).take(6).collect();
+        let date_red = Local::today().naive_local();
+        let date_normal = date_red + Duration::days(15);
+        let res = client.post("/")
+            .header(ContentType::Form)
+            .body(format!("name={}&expiry_date={}", &name_red, &date_red))
+            .dispatch();
+        assert_eq!(res.status(), Status::SeeOther);
+        let res = client.post("/")
+            .header(ContentType::Form)
+            .body(format!("name={}&expiry_date={}", &name_normal, &date_normal))
+            .dispatch();
+        assert_eq!(res.status(), Status::SeeOther);
+
+        let mut res = client.get("/").dispatch();
+        assert_eq!(res.status(), Status::Ok);
+        let body = res.body_string().unwrap();
+        assert!(body.contains(&format!(
+            r#"<td style="color: red">{}</td>"#, &name_red
+        )));
+        assert!(body.contains(&format!("<td>{}</td>", &name_normal)));
     })
 }
 

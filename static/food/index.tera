@@ -40,8 +40,14 @@
                     <tbody>
                         {% for food in foods %}
                         <tr>
+                            {% set is_red_date = is_red_date(expiry_date=food.expiry_date) %}
+                            {% if is_red_date %}
+                            <td style="color: red">{{ food.name }}</td>
+                            <td style="color: red">{{ food.expiry_date }}</td>
+                            {% else %}
                             <td>{{ food.name }}</td>
                             <td>{{ food.expiry_date }}</td>
+                            {% endif %}
                             <td>
                                 <form class="inline" action="/{{ food.id }}" method="post">
                                     <input type="hidden" name="_method" value="delete" />
