@@ -2,6 +2,8 @@
 
 Expiry date list of my food
 
+![index image](./img/index.png)
+
 ## Usage
 
 First, you have to install SQLite.
