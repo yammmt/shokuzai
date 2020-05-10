@@ -6,7 +6,13 @@ Expiry date list of my food
 
 ## Usage
 
-First, you have to install SQLite.
+First, you have to install SQLite. According to [Rocket repository](https://github.com/SergioBenitez/Rocket/tree/master/examples/todo), for example:
+
+- OS X: `brew install sqlite`
+- Debian/Ubuntu: `apt-get install libsqlite3-dev`
+
+Then, clone this repository and run Rust program.
+If you don't have **nightly** Rust, please install it with `rustup install nightly`.
 
 ```bash
 git clone https://github.com/yammmt/shokuzai.git
