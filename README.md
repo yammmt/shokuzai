@@ -1,5 +1,7 @@
 # shokuzai
 
+![Rust](https://github.com/yammmt/shokuzai/workflows/Rust/badge.svg)
+
 Expiry date list of my food
 
 ![index image](./img/index.png)
