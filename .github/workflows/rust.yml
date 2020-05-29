@@ -1,10 +1,6 @@
 name: Rust
 
-on:
-  push:
-    branches: [ master ]
-  pull_request:
-    branches: [ master ]
+on: [push, pull_request]
 
 jobs:
   build:
@@ -22,7 +18,7 @@ jobs:
     - name: Run tests
       run: cargo test --verbose
 
-  clippy_check:
+  linter:
 
     runs-on: ubuntu-latest
 
@@ -33,9 +29,11 @@ jobs:
     - uses: actions-rs/toolchain@v1
       with:
           toolchain: nightly
-          components: clippy
+          components: clippy, rustfmt
           override: true
     - uses: actions-rs/clippy-check@v1
       with:
           token: ${{ secrets.GITHUB_TOKEN }}
           args: --all-features
+    - name: rustfmt
+      run: cargo fmt -- --check
