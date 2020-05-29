@@ -1,20 +1,30 @@
 #![feature(proc_macro_hygiene, decl_macro)]
 
-#[macro_use] extern crate diesel;
-#[macro_use] extern crate diesel_migrations;
-#[macro_use] extern crate log;
-#[macro_use] extern crate rocket;
-#[macro_use] extern crate rocket_contrib;
-#[macro_use] extern crate serde_derive;
+#[macro_use]
+extern crate diesel;
+#[macro_use]
+extern crate diesel_migrations;
+#[macro_use]
+extern crate log;
+#[macro_use]
+extern crate rocket;
+#[macro_use]
+extern crate rocket_contrib;
+#[macro_use]
+extern crate serde_derive;
 
 mod models;
 mod routes;
-#[cfg(test)] mod tests;
+#[cfg(test)]
+mod tests;
 
 use chrono::{Duration, Local};
-use rocket::{Rocket, fairing::AdHoc};
-use rocket_contrib::{templates::{Template, tera::Error}, serve::StaticFiles};
 use diesel::SqliteConnection;
+use rocket::{fairing::AdHoc, Rocket};
+use rocket_contrib::{
+    serve::StaticFiles,
+    templates::{tera::Error, Template},
+};
 use serde_json::value::Value;
 use std::collections::HashMap;
 
@@ -54,13 +64,14 @@ fn rocket() -> Rocket {
         .attach(DbConn::fairing())
         .attach(AdHoc::on_attach("DB Migrations", run_db_migrations))
         .mount("/", StaticFiles::from("static/"))
-        .mount("/", routes![
-            routes::food::index,
-            routes::food::new,
-            routes::food::delete,
-        ])
+        .mount(
+            "/",
+            routes![routes::food::index, routes::food::new, routes::food::delete,],
+        )
         .attach(Template::custom(|engines| {
-            engines.tera.register_function("is_red_date", Box::new(is_red_date));
+            engines
+                .tera
+                .register_function("is_red_date", Box::new(is_red_date));
         }))
 }
 fn main() {
