@@ -33,7 +33,7 @@ fn food_index_page() {
 
         // Ensure foods are sorted by expiry date.
         let food_num = 3;
-        let mut rng = thread_rng();
+        let rng = thread_rng();
         let mut names: Vec<String> = Vec::with_capacity(food_num);
         let dates = ["2020-02-01", "2020-05-31", "2020-01-01"];
         for i in 0..food_num {
