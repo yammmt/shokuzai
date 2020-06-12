@@ -3,3 +3,7 @@
 # DB files
 
 db/*.sqlite
+
+# sass
+
+static/.sass-cache
