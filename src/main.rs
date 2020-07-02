@@ -74,6 +74,7 @@ fn rocket() -> Rocket {
                 .register_function("is_red_date", Box::new(is_red_date));
         }))
 }
+
 fn main() {
     rocket().launch();
 }
