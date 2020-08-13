@@ -36,12 +36,12 @@ fn food_index_page() {
         let rng = thread_rng();
         let mut names: Vec<String> = Vec::with_capacity(food_num);
         let dates = ["2020-02-01", "2020-05-31", "2020-01-01"];
-        for i in 0..food_num {
+        for date in &dates {
             let name: String = rng.sample_iter(&Alphanumeric).take(6).collect();
             let res = client
                 .post("/")
                 .header(ContentType::Form)
-                .body(format!("name={}&expiry_date={}", &name, &dates[i]))
+                .body(format!("name={}&expiry_date={}", &name, &date))
                 .dispatch();
             assert_eq!(res.status(), Status::SeeOther);
             let mut cookies = res.headers().get("Set-Cookie");
