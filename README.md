@@ -19,7 +19,6 @@ If you don't have **nightly** Rust, please install it with `rustup install night
 ```bash
 git clone https://github.com/yammmt/shokuzai.git
 cd shokuzai
-rustup override set nightly
 cargo run # or `cargo run --release`
 ```
 
