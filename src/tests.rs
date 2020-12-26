@@ -33,11 +33,15 @@ fn food_index_page() {
 
         // Ensure foods are sorted by expiry date.
         let food_num = 3;
-        let rng = thread_rng();
+        let mut rng = thread_rng();
         let mut names: Vec<String> = Vec::with_capacity(food_num);
         let dates = ["2020-02-01", "2020-05-31", "2020-01-01"];
         for date in &dates {
-            let name: String = rng.sample_iter(&Alphanumeric).take(6).collect();
+            let name: String = (&mut rng)
+                .sample_iter(&Alphanumeric)
+                .map(char::from)
+                .take(6)
+                .collect();
             let res = client
                 .post("/")
                 .header(ContentType::Form)
@@ -55,8 +59,16 @@ fn food_index_page() {
         assert!(body.find(&names[0]).unwrap() < body.find(&names[1]).unwrap());
 
         // Ensure dangerous food has red string.
-        let name_red: String = rng.sample_iter(&Alphanumeric).take(6).collect();
-        let name_normal: String = rng.sample_iter(&Alphanumeric).take(6).collect();
+        let name_red: String = (&mut rng)
+            .sample_iter(&Alphanumeric)
+            .map(char::from)
+            .take(6)
+            .collect();
+        let name_normal: String = (&mut rng)
+            .sample_iter(&Alphanumeric)
+            .map(char::from)
+            .take(6)
+            .collect();
         let date_red = Local::today().naive_local();
         let date_normal = date_red + Duration::days(15);
         let res = client
