@@ -1,17 +1,7 @@
 use diesel::{self, prelude::*};
 
-mod schema {
-    table! {
-        foods {
-            id -> Nullable<Integer>,
-            name -> Text,
-            expiry_date -> Text,
-        }
-    }
-}
-
-use self::schema::foods;
-use self::schema::foods::dsl::foods as all_foods;
+use crate::schema::foods;
+use crate::schema::foods::dsl::foods as all_foods;
 
 #[table_name = "foods"]
 #[derive(Clone, Debug, FromForm, Insertable, Serialize, Queryable)]

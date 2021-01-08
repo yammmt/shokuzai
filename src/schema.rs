@@ -1,6 +1,7 @@
 table! {
     foods (id) {
-        id -> Int4,
-        name -> Varchar,
+        id -> Nullable<Integer>,
+        name -> Text,
+        expiry_date -> Text,
     }
 }

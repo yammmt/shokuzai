@@ -15,6 +15,7 @@ extern crate serde_derive;
 
 mod models;
 mod routes;
+mod schema;
 #[cfg(test)]
 mod tests;
 
