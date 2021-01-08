@@ -193,7 +193,7 @@ fn food_deletion_passed() {
         assert_eq!(res.status(), Status::SeeOther);
         let mut cookies = res.headers().get("Set-Cookie");
         assert!(cookies.any(|v| v.contains("success")));
-        let id = Food::all(&conn)[0].id.unwrap();
+        let id = Food::all(&conn)[0].id;
 
         // Delete the created food.
         let res = client.delete(format!("/{}", id)).dispatch();

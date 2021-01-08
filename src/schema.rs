@@ -1,6 +1,6 @@
 table! {
     foods (id) {
-        id -> Nullable<Integer>,
+        id -> Integer,
         name -> Text,
         expiry_date -> Text,
     }

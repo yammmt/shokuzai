@@ -3,10 +3,16 @@ use diesel::{self, prelude::*};
 use crate::schema::foods;
 use crate::schema::foods::dsl::foods as all_foods;
 
-#[table_name = "foods"]
-#[derive(Clone, Debug, FromForm, Insertable, Serialize, Queryable)]
+#[derive(Clone, Debug, Serialize, Queryable)]
 pub struct Food {
-    pub id: Option<i32>,
+    pub id: i32,
+    pub name: String,
+    pub expiry_date: String,
+}
+
+#[table_name = "foods"]
+#[derive(Clone, Debug, FromForm, Insertable, Serialize)]
+pub struct FoodForm {
     pub name: String,
     pub expiry_date: String,
 }
@@ -19,14 +25,9 @@ impl Food {
             .unwrap()
     }
 
-    pub fn insert(form: Food, conn: &SqliteConnection) -> bool {
-        let f = Food {
-            id: None,
-            name: form.name,
-            expiry_date: form.expiry_date,
-        };
+    pub fn insert(form: FoodForm, conn: &SqliteConnection) -> bool {
         diesel::insert_into(foods::table)
-            .values(&f)
+            .values(&form)
             .execute(conn)
             .is_ok()
     }

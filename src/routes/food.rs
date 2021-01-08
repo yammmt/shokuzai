@@ -2,7 +2,7 @@ extern crate rocket;
 extern crate rocket_contrib;
 extern crate serde_derive;
 
-use crate::models::food::Food;
+use crate::models::food::{Food, FoodForm};
 use crate::DbConn;
 
 use rocket::request::{FlashMessage, Form};
@@ -36,7 +36,7 @@ pub fn index(msg: Option<FlashMessage>, conn: DbConn) -> Template {
 }
 
 #[post("/", data = "<food_form>")]
-pub fn new(food_form: Form<Food>, conn: DbConn) -> Flash<Redirect> {
+pub fn new(food_form: Form<FoodForm>, conn: DbConn) -> Flash<Redirect> {
     let food = food_form.into_inner();
     if food.name.is_empty() || food.expiry_date.is_empty() {
         Flash::warning(Redirect::to("/"), "Please input name and date.")
