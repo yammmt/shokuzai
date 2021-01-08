@@ -1,15 +1,14 @@
-extern crate parking_lot;
 extern crate rand;
 
-use self::parking_lot::Mutex;
 use self::rand::{distributions::Alphanumeric, thread_rng, Rng};
 use super::models::food::Food;
 
 use chrono::{Duration, Local};
+use parking_lot::Mutex;
 use rocket::http::{ContentType, Status};
 use rocket::local::Client;
 
-static DB_LOCK: Mutex<()> = Mutex::new(());
+static DB_LOCK: Mutex<()> = parking_lot::const_mutex(());
 
 macro_rules! run_test {
     (|$client:ident, $conn:ident| $block:expr) => {{
