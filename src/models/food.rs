@@ -10,8 +10,8 @@ pub struct Food {
     pub expiry_date: String,
 }
 
-#[table_name = "foods"]
 #[derive(Clone, Debug, FromForm, Insertable, Serialize)]
+#[table_name = "foods"]
 pub struct FoodForm {
     pub name: String,
     pub expiry_date: String,
