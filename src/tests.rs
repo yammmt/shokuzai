@@ -68,7 +68,7 @@ fn food_index_page() {
             .map(char::from)
             .take(6)
             .collect();
-        let date_red = Local::today().naive_local();
+        let date_red = Local::now().naive_local();
         let date_normal = date_red + Duration::days(15);
         let res = client
             .post("/")
