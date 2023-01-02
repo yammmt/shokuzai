@@ -28,7 +28,7 @@ impl<'a, 'b> IndexContext<'a, 'b> {
 pub fn index(msg: Option<FlashMessage>, conn: DbConn) -> Template {
     Template::render(
         "food/index",
-        &match msg {
+        match msg {
             Some(ref msg) => IndexContext::raw(&conn, Some((msg.name(), msg.msg()))),
             None => IndexContext::raw(&conn, None),
         },
