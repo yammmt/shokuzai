@@ -294,8 +294,8 @@ dependencies = [
  "cc",
  "codespan-reporting",
  "once_cell",
- "proc-macro2 1.0.47",
- "quote 1.0.7",
+ "proc-macro2 1.0.53",
+ "quote 1.0.26",
  "scratch",
  "syn 1.0.105",
 ]
@@ -312,8 +312,8 @@ version = "1.0.90"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "ebf883b7aacd7b2aeb2a7b338648ee19f57c140d4ee8e52c68979c6b2f7f2263"
 dependencies = [
- "proc-macro2 1.0.47",
- "quote 1.0.7",
+ "proc-macro2 1.0.53",
+ "quote 1.0.26",
  "syn 1.0.105",
 ]
 
@@ -374,8 +374,8 @@ version = "1.4.1"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "45f5098f628d02a7a0f68ddba586fb61e80edec3bdc1be3b921f4ceec60858d3"
 dependencies = [
- "proc-macro2 1.0.47",
- "quote 1.0.7",
+ "proc-macro2 1.0.53",
+ "quote 1.0.26",
  "syn 1.0.105",
 ]
 
@@ -797,8 +797,8 @@ source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "9753f12909fd8d923f75ae5c3258cae1ed3c8ec052e1b38c93c21a6d157f789c"
 dependencies = [
  "migrations_internals",
- "proc-macro2 1.0.47",
- "quote 1.0.7",
+ "proc-macro2 1.0.53",
+ "quote 1.0.26",
  "syn 1.0.105",
 ]
 
@@ -1048,8 +1048,8 @@ checksum = "99b8db626e31e5b81787b9783425769681b347011cc59471e33ea46d2ea0cf55"
 dependencies = [
  "pest",
  "pest_meta",
- "proc-macro2 1.0.47",
- "quote 1.0.7",
+ "proc-macro2 1.0.53",
+ "quote 1.0.26",
  "syn 1.0.105",
 ]
 
@@ -1097,9 +1097,9 @@ dependencies = [
 
 [[package]]
 name = "proc-macro2"
-version = "1.0.47"
+version = "1.0.53"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "5ea3d908b0e36316caf9e9e2c4625cdde190a7e6f440d794667ed17a1855e725"
+checksum = "ba466839c78239c09faf015484e5cc04860f88242cff4d03eb038f04b4699b73"
 dependencies = [
  "unicode-ident",
 ]
@@ -1115,11 +1115,11 @@ dependencies = [
 
 [[package]]
 name = "quote"
-version = "1.0.7"
+version = "1.0.26"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "aa563d17ecb180e500da1cfd2b028310ac758de548efdd203e18f283af693f37"
+checksum = "4424af4bf778aae2051a77b60283332f386554255d722233d09fbfc7e30da2fc"
 dependencies = [
- "proc-macro2 1.0.47",
+ "proc-macro2 1.0.53",
 ]
 
 [[package]]
@@ -1375,13 +1375,13 @@ checksum = "771d4d9c4163ee138805e12c710dd365e4f44be8be0503cb1bb9eb989425d9c9"
 
 [[package]]
 name = "serde_derive"
-version = "1.0.156"
+version = "1.0.158"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "d7e29c4601e36bcec74a223228dce795f4cd3616341a4af93520ca1a837c087d"
+checksum = "e801c1712f48475582b7696ac71e0ca34ebb30e09338425384269d9717c62cad"
 dependencies = [
- "proc-macro2 1.0.47",
- "quote 1.0.7",
- "syn 1.0.105",
+ "proc-macro2 1.0.53",
+ "quote 1.0.26",
+ "syn 2.0.8",
 ]
 
 [[package]]
@@ -1492,8 +1492,19 @@ version = "1.0.105"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "60b9b43d45702de4c839cb9b51d9f529c5dd26a4aff255b42b1ebc03e88ee908"
 dependencies = [
- "proc-macro2 1.0.47",
- "quote 1.0.7",
+ "proc-macro2 1.0.53",
+ "quote 1.0.26",
+ "unicode-ident",
+]
+
+[[package]]
+name = "syn"
+version = "2.0.8"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "bcc02725fd69ab9f26eab07fad303e2497fad6fb9eba4f96c4d1687bdf704ad9"
+dependencies = [
+ "proc-macro2 1.0.53",
+ "quote 1.0.26",
  "unicode-ident",
 ]
 
@@ -1753,8 +1764,8 @@ dependencies = [
  "bumpalo",
  "log 0.4.17",
  "once_cell",
- "proc-macro2 1.0.47",
- "quote 1.0.7",
+ "proc-macro2 1.0.53",
+ "quote 1.0.26",
  "syn 1.0.105",
  "wasm-bindgen-shared",
 ]
@@ -1765,7 +1776,7 @@ version = "0.2.82"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "b260f13d3012071dfb1512849c033b1925038373aea48ced3012c09df952c602"
 dependencies = [
- "quote 1.0.7",
+ "quote 1.0.26",
  "wasm-bindgen-macro-support",
 ]
 
@@ -1775,8 +1786,8 @@ version = "0.2.82"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "5be8e654bdd9b79216c2929ab90721aa82faf65c48cdf08bdc4e7f51357b80da"
 dependencies = [
- "proc-macro2 1.0.47",
- "quote 1.0.7",
+ "proc-macro2 1.0.53",
+ "quote 1.0.26",
  "syn 1.0.105",
  "wasm-bindgen-backend",
  "wasm-bindgen-shared",
